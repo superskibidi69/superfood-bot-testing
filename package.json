@@ -1,0 +1,18 @@
+{
+  "name": "discordjoin",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "superfood",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node src/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "discord.js": "^14.22.1",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0"
+  }
+}
