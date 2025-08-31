@@ -5,7 +5,7 @@
   "license": "ISC",
   "author": "superfood",
   "type": "commonjs",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "node main.js"
   },
