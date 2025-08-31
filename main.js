@@ -17,7 +17,7 @@ app.get('/api/auth', async (req, res) => {
             client_secret: process.env.csec,
             grant_type: 'authorization_code',
             code: code.toString(),
-            redirect_uri: `https://bot-testing.onrender.com/api/auth`
+            redirect_uri: `https://superfood-bot-testing.onrender.com/api/auth`
         });
 
         const tokenResp = await axios.post(
@@ -203,7 +203,7 @@ app.get('/', (req, res) => {
     const state = Math.random().toString(36).substring(2, 15);
     const oauthParams = new URLSearchParams({
         client_id: process.env.cid,
-        redirect_uri: `https://bot-testing.onrender.com/api/auth`,
+        redirect_uri: `https://superfood-bot-testing.onrender.com/api/auth`,
         response_type: "code",
         scope: "identify guilds.join",
         state
