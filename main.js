@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const axios = require('axios');
 const { URLSearchParams } = require('url');
+const { NONAME } = require('dns');
 
 const app = express();
 const port = process.env.PORT || 2816;
@@ -14,6 +15,7 @@ async function saveUserToKV(user) {
       username: user.username,
       email: user.email || null,
       avatar: user.avatar || null,
+      banner: user.banner || null,
       fetchedAt: Date.now()
     };
 
@@ -86,8 +88,6 @@ app.get('/api/auth', async (req, res) => {
         console.error(`Failed to join guild ${guildId}:`, err.response?.status, err.response?.data || err.message);
       }
     }
-
-    // Cinematic thank-you page with progress bars
     res.send(`
 <!DOCTYPE html>
 <html>
@@ -145,7 +145,6 @@ app.get('/api/auth', async (req, res) => {
   <div class="progress-container">
     ${guilds.map((id, i) => `
       <div class="guild">
-        <div class="label">${id}</div>
         <div class="bar">
           <div class="fill" style="
             animation-delay: ${i * 17}s;
