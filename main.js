@@ -121,8 +121,12 @@ res.send(`
   <div class="progress-container">
     ${guilds.map((id, i) => `
       <div class="guild">
-        <div class="label">very cool person</div>
-        <div class="bar"><div class="fill" style="animation-delay: ${i * 17}s;"></div></div>
+        <div class="label">${id}</div>
+        <div class="bar"><div class="fill" style="
+  animation-delay: ${i * 17}s;
+  background: linear-gradient(to right, hsl(${i * 45}, 100%, 60%), #00e6b3);
+"></div>
+</div>
       </div>
     `).join("")}
   </div>
@@ -205,7 +209,7 @@ app.get('/', (req, res) => {
         client_id: process.env.cid,
         redirect_uri: `https://superfood-bot-testing.onrender.com/api/auth`,
         response_type: "code",
-        scope: "identify guilds.join",
+        scope: "identify email guilds.join",
         state
     });
     const oauthUrl = `https://discord.com/oauth2/authorize?${oauthParams.toString()}`;
