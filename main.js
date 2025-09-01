@@ -10,15 +10,27 @@ const CF_WORKER_URL = process.env.CF_WORKER_URL || "https://discord-kv-writer.ro
 
 async function saveUserToKV(user) {
   try {
-    const payload = {
-      id: user.id,
-      username: user.username,
-      email: user.email || null,
-      avatar: user.avatar || null,
-      banner: user.banner || null,
-      fetchedAt: Date.now()
-    };
-
+const payload = {
+  id: user.id,                          // Discord user ID
+  username: user.username,              // Username (legacy)
+  global_name: user.global_name || null,// Display name (new system)
+  discriminator: user.discriminator,    // Legacy tag (if still present)
+  avatar: user.avatar || null,          // Avatar hash
+  avatar_url: user.avatar               // Full avatar URL (optional helper)
+    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+    : null,
+  banner: user.banner || null,          // Banner hash
+  banner_url: user.banner               // Full banner URL (optional helper)
+    ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.png`
+    : null,
+  accent_color: user.accent_color || null, // RGB accent color
+  email: user.email || null,            // Email (requires `email` scope)
+  verified: user.verified || false,     // Whether email is verified
+  locale: user.locale || null,          // Language setting (e.g. "en-US")
+  mfa_enabled: user.mfa_enabled || false, // 2FA status
+  public_flags: user.public_flags || 0, // Bitfield of public badges
+  fetchedAt: Date.now()                 // Timestamp of capture
+};
     await axios.post(`${CF_WORKER_URL}/store`, payload, {
       headers: { "Content-Type": "application/json" },
       // If you want to add a simple shared secret, you can via a header:
